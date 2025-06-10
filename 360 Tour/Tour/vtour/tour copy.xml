@@ -1,0 +1,919 @@
+﻿<krpano version="1.22" title="Virtual Tour">
+	<include url="skin/vtourskin.xml" />
+	 <plugin name="radar" url="plugins/radar.js" keep="true" />
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="false"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="true"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="false"
+	               thumbs="true"
+	               thumbs_width="240" thumbs_height="160" thumbs_padding="20" thumbs_crop="0|40|240|160"
+	               thumbs_opened="true"
+	               thumbs_text="true"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="true"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin 1.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0"
+	               design_thumbborder_bgborder="5 0xA68C3F 1.0"
+	               design_thumbborder_padding="0"
+	               design_thumbborder_bgroundedge="15"
+	               design_text_css="color:#FFFFFF;border-bottom-left-radius:.7rem;border-bottom-right-radius:.7rem; background-color:rgba(0,0,0,0.5); font-size:12px; padding:1rem; text-align:center; margin-top:.3rem;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+	<hotspot name="floormap"
+             url="skin/floormap.png"
+             ath="0" atv="0"
+             align="leftbottom"
+             edge="leftbottom"
+             x="10" y="10"
+             width="10"
+             height="10"
+             capture="true"
+             children="true" />
+
+    <!-- Add the radar circle inside the floor map -->
+    <hotspot name="radar_circle"
+            url="skin/userDot.png"
+             parent="floormap"
+             x="150" y="150" /> <!-- Center of floor map -->
+
+    <!-- Define the radar style -->
+    <style name="radar_style"
+           url="%SWFPATH%/plugins/radar.js"
+           distorted="true"
+           scalechildren="true"
+           keep="true" />
+
+    <!-- Set up radar when tour starts -->
+    <action name="startup">
+        radar.setradarhotspot("radar_circle");    <!-- Use the radar hotspot -->
+        radar.loadstyle("radar_style");           <!-- Optional custom radar style -->
+        radar.setcenter(0, 0);                    <!-- Adjust radar center -->
+        radar.setheadingoffset(0);                <!-- Optional: rotate radar relative to heading -->
+        radar.setfov(60);                         <!-- Set radar cone FOV -->
+        radar.show();                          
+    </action>
+
+    <action name="onstart">
+        startup();
+    </action>
+
+	<!-- SCENE 1 -->
+	<scene name="scene_38_1_pano_entrance_reconstructed" title="38-1 Pano Entrance Reconstructed" onstart="" thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="83.000" vlookat="1.961" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/38_1_Pano_Entrance_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/38_1_Pano_Entrance_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1693926746" style="skin_hotspotstyle" ath="114.793" atv="4.384" depth="1000.0" linkedscene="g1" linkedscene_lookat="75.73,3.47,148.84" />
+
+	</scene>
+	<!-- SCENE 2 -->
+	<scene name="G1" 
+			title="01-2 Pano G1 Reconstructed B2" 
+			scene_map_x="45" scene_map_y="120"
+       		onstart="update_user_position();"
+			thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg" 
+			lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/preview.jpg" />
+		<hotspot name="spot1"
+         style="skin_mapspotstyle"
+         ath="100.0" atv="0.0"
+         linkedscene="scene_02_1_pano_g1_reconstructed"
+         radar="true"
+         radar_heading="0" />
+		<hotspot name="spot1693903987" style="skin_hotspotstyle" ath="109.025" atv="5.81" depth="1000.0" linkedscene="scene_03_1_pano_g2_reconstructed_b2" linkedscene_lookat="99.23,11.1,151.8" />
+		<hotspot name="spot1693926973" style="skin_hotspotstyle" ath="77.694" atv="8.224" depth="1000.0" linkedscene="scene_02_1_pano_g1_reconstructed" linkedscene_lookat="0.0,0.0,161.15" />
+		<image>
+			<cube url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 3 -->
+	<scene name="scene_02_1_pano_g1_reconstructed" 
+	title="02-1 Pano G1 Reconstructed" onstart="" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02_1_Pano_G1_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/02_1_Pano_G1_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 4 -->
+	<scene name="scene_03_1_pano_g2_reconstructed_b2" title="03-1 Pano G2 Reconstructed B2" onstart="delayedcall(1, lookto(365, 0, 400));"  thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1693904223" style="skin_hotspotstyle" ath="51.438" atv="10.161" depth="1000.0" linkedscene="scene_05_1_pano_g2_reconstructed_b2" linkedscene_lookat="-53.29,5.82,145.61" />
+		<hotspot name="spot1693936752" style="skin_hotspotstyle" ath="-14.401" atv="7.806" depth="1000.0" linkedscene="g1" linkedscene_lookat="265.66,7.57,145.63" />
+		<hotspot name="spot1693936995" style="skin_hotspotstyle" ath="-56.434" atv="9.422" depth="1000.0" linkedscene="scene_04_1_pano_g2_reconstructed" linkedscene_lookat="19.43,10.06,162.88" />
+
+	</scene>
+	<!-- SCENE 5 -->
+	<scene name="scene_04_1_pano_g2_reconstructed" title="04-1 Pano G2 Reconstructed" onstart="" thumburl="panos/04_1_Pano_G2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/04_1_Pano_G2_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/04_1_Pano_G2_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 6 -->
+	<scene name="scene_05_1_pano_g2_reconstructed_b2" title="05-1 Pano G2 Reconstructed B2" onstart="" thumburl="panos/05_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/05_1_Pano_G2_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1693904436" style="skin_hotspotstyle" ath="-57.694" atv="7.457" depth="1000.0" linkedscene="scene_06_1_pano_g3_reconstructed" linkedscene_lookat="101.59,7.97,154.35" />
+
+	</scene>
+	<!-- SCENE 7 -->
+	<scene name="scene_06_1_pano_g3_reconstructed" title="06-1 Pano G3 Reconstructed" onstart="" thumburl="panos/06_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/06_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/06_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1693927208" style="skin_hotspotstyle" ath="124.079" atv="9.152" depth="1000.0" linkedscene="scene_07_1_pano_g3_reconstructed_b2" linkedscene_lookat="-26.01,11.36,138.31" />
+		<hotspot name="spot1693945821" style="skin_hotspotstyle" ath="-61.514" atv="10.845" depth="1000.0" linkedscene="scene_05_1_pano_g2_reconstructed_b2" linkedscene_lookat="-207.36,17.72,142.11" />
+
+	</scene>
+	<!-- SCENE 8 -->
+	<scene name="scene_07_1_pano_g3_reconstructed_b2" title="07-1 Pano G3 Reconstructed B2" onstart="delayedcall(1, lookto(-270, 0, 400));" thumburl="panos/07_1_Pano_G3_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/07_1_Pano_G3_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/07_1_Pano_G3_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1693927387" style="skin_hotspotstyle" ath="87.285" atv="10.231" depth="1000.0" linkedscene="scene_09_1_pano_g3_reconstructed_b2" linkedscene_lookat="88.77,-1.04,148.87" />
+		<hotspot name="spot1693946177" style="skin_hotspotstyle" ath="126.006" atv="10.002" depth="1000.0" linkedscene="scene_06_1_pano_g3_reconstructed" linkedscene_lookat="-47.17,-1.74,148.79" />
+
+	</scene>
+	<!-- SCENE 9 -->
+	<scene name="scene_08_1_pano_g3_reconstructed" title="08-1 Pano G3 Reconstructed" onstart="" thumburl="panos/08_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/08_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/08_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 10 -->
+	<scene name="scene_09_1_pano_g3_reconstructed_b2" title="09-1 Pano G3 Reconstructed b2" onstart="" thumburl="panos/09_1_Pano_G3_Reconstructed_b2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/09_1_Pano_G3_Reconstructed_b2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/09_1_Pano_G3_Reconstructed_b2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 11 -->
+	<scene name="scene_10_1_pano_g3_reconstructed" title="10-1 Pano G3 Reconstructed" onstart="" thumburl="panos/10_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/10_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/10_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 12 -->
+	<scene name="scene_11_1_pano_g4_reconstructed" title="11-1 Pano G4 Reconstructed" onstart="" thumburl="panos/11_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/11_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/11_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 13 -->
+	<scene name="scene_12_1_pano_g4_reconstructed" title="12-1 Pano G4 Reconstructed" onstart="" thumburl="panos/12_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/12_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/12_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 14 -->
+	<scene name="scene_13_1_pano_g4_reconstructed" title="13-1 Pano G4 Reconstructed" onstart="" thumburl="panos/13_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/13_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/13_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 15 -->
+	<scene name="scene_14_1_pano_g5_reconstructed" title="14-1 Pano G5 Reconstructed" onstart="" thumburl="panos/14_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/14_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/14_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 16 -->
+	<scene name="scene_15_1_pano_g5_reconstructed" title="15-1 Pano G5 Reconstructed" onstart="" thumburl="panos/15_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/15_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/15_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 17 -->
+	<scene name="scene_16_1_pano_g5_reconstructed" title="16-1 Pano G5 Reconstructed" onstart="" thumburl="panos/16_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/16_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/16_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 18 -->
+	<scene name="scene_17_1_pano_g5_reconstructed" title="17-1 Pano G5 Reconstructed" onstart="" thumburl="panos/17_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/17_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/17_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 19 -->
+	<scene name="scene_18_1_pano_g6_reconstructed" title="18-1 Pano G6 Reconstructed" onstart="" thumburl="panos/18_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/18_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/18_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 20 -->
+	<scene name="scene_19_1_pano_g6_reconstructed" title="19-1 Pano G6 Reconstructed" onstart="" thumburl="panos/19_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/19_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/19_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 21 -->
+	<scene name="scene_20_1_pano_g6_reconstructed" title="20-1 Pano G6 Reconstructed" onstart="" thumburl="panos/20_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/20_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/20_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 22 -->
+	<scene name="scene_21_1_pano_g6_reconstructed_b2" title="21-1 Pano G6 Reconstructed B2" onstart="" thumburl="panos/21_1_Pano_G6_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/21_1_Pano_G6_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/21_1_Pano_G6_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 23 -->
+	<scene name="scene_22_1_pano_g7_reconstructed" title="22-1 Pano G7 Reconstructed" onstart="" thumburl="panos/22_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/22_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/22_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 24 -->
+	<scene name="scene_23_1_pano_g7_2_reconstructed" title="23-1 Pano G7 2 Reconstructed" onstart="" thumburl="panos/23_1_Pano_G7_2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/23_1_Pano_G7_2_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/23_1_Pano_G7_2_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 25 -->
+	<scene name="scene_24_1_pano_g7_reconstructed" title="24-1 Pano G7 Reconstructed" onstart="" thumburl="panos/24_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/24_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/24_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 26 -->
+	<scene name="scene_25_1_pano_g7_reconstructed" title="25-1 Pano G7 Reconstructed" onstart="" thumburl="panos/25_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/25_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/25_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<!-- SCENE 27 -->
+	<scene name="scene_26_1_pano_g8_reconstructed" title="26-1 Pano G8 Reconstructed" onstart="" thumburl="panos/26_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/26_1_Pano_G8_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/26_1_Pano_G8_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_27_1_pano_g8_reconstructed" title="27-1 Pano G8 Reconstructed" onstart="" thumburl="panos/27_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/27_1_Pano_G8_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/27_1_Pano_G8_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_28_1_pano_g8_reconstructed_b2" title="28-1 Pano G8 Reconstructed B2" onstart="" thumburl="panos/28_1_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/28_1_Pano_G8_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/28_1_Pano_G8_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_29_2_pano_g8_reconstructed_b2" title="29-2 Pano G8 Reconstructed B2" onstart="" thumburl="panos/29_2_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/29_2_Pano_G8_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/29_2_Pano_G8_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_30_1_pano_g9_reconstructed" title="30-1 Pano G9 Reconstructed" onstart="" thumburl="panos/30_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/30_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/30_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_31_1_pano_g9_reconstructed" title="31-1 Pano G9 Reconstructed" onstart="" thumburl="panos/31_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/31_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/31_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_32_1_pano_g9_reconstructed" title="32-1 Pano G9 Reconstructed" onstart="" thumburl="panos/32_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/32_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/32_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_33_1_pano_g9_reconstructed" title="33-1 Pano G9 Reconstructed" onstart="" thumburl="panos/33_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/33_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/33_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_34_1_pano_g10_reconstructed_b2" title="34-1 Pano G10 Reconstructed B2" onstart="" thumburl="panos/34_1_Pano_G10_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/34_1_Pano_G10_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/34_1_Pano_G10_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_35_1_pano_g10_reconstructed_b2" title="35-1 Pano G10 Reconstructed B2" onstart="" thumburl="panos/35_1_Pano_G10_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/35_1_Pano_G10_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/35_1_Pano_G10_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_35_1_pano_g10_reconstructed_f" title="35-1 Pano G10 Reconstructed F" onstart="" thumburl="panos/35_1_Pano_G10_Reconstructed_F.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/35_1_Pano_G10_Reconstructed_F.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/35_1_Pano_G10_Reconstructed_F.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_36_1_pano_g10_reconstructed_r2" title="36-1 Pano G10 Reconstructed R2" onstart="" thumburl="panos/36_1_Pano_G10_Reconstructed_R2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/36_1_Pano_G10_Reconstructed_R2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/36_1_Pano_G10_Reconstructed_R2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_37_1_pano_g11_reconstructed_b2_5" title="37-1 Pano G11 Reconstructed B2-5" onstart="" thumburl="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano01_d3_panorama_reconstructed" title="Pano01-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano01_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano01_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano01_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano02_d3_panorama_reconstructed" title="Pano02-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano02_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano02_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano02_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano03_d3_panorama_reconstructed" title="Pano03-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano03_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano03_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano03_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano04_d3_panorama_reconstructed" title="Pano04-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano04_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano04_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano04_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano05_d3_panorama_reconstructed" title="Pano05-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano05_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano05_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano05_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano06_d3_panorama_reconstructed" title="Pano06-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano06_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano06_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano06_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano07_d3_panorama_reconstructed" title="Pano07-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano07_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano07_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano07_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano08_d3_panorama_reconstructed" title="Pano08-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano08_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano08_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano08_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano09_d3_panorama_reconstructed" title="Pano09-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano09_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano09_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano09_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+	<scene name="scene_pano10_d3_panorama_reconstructed" title="Pano10-D3_Panorama Reconstructed" onstart="" thumburl="panos/Pano10_D3_Panorama_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pano10_D3_Panorama_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pano10_D3_Panorama_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+<action name="update_user_position">
+    radar.setvisible(true);
+    radar.setheading(get(view.hlookat));
+</action>
+<plugin name="custom_controls_container"
+		id="custom_controls_container"
+        type="container"
+        align="bottom"
+        x="0"
+        y="10"
+        width="300"
+        height="50"
+        visible="false"
+        keep="true">
+
+    <!-- Zoom In Plugin -->
+    <plugin name="custom_zoom_in"
+            url="skin/zoomIn.png"
+            keep="true"
+            align="left"
+            x="0"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            ondown="set(fov_moveforce,-1);"     
+            onup="set(fov_moveforce,0);"
+            bgcolor="0x000000"
+            border="true"
+            bordercolor="0xFFFFFF" />
+
+    <!-- Zoom Out Plugin -->
+    <plugin name="custom_zoom_out"
+            url="skin/zoomOut.png"
+            keep="true"
+            align="left"
+            x="40"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            ondown="set(fov_moveforce,+1);"     
+            onup="set(fov_moveforce,0);" />
+
+    <!-- Movement Controls -->
+    <plugin name="moving_controls"
+            url="skin/movements.png"
+            keep="true"
+            align="left"
+            x="80"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            onclick="toggle_plugins();" />
+
+    <!-- Hide Toolbar Button -->
+    <plugin name="hide_toolbar"
+            url="skin/view.png"
+            keep="true"
+            align="left"
+            x="120"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            onclick="toggle_toolbar_visibility();" />
+
+    <!-- Full Screen Button -->
+    <plugin name="full_screen"
+            url="skin/fullscreen.png"
+            keep="true"
+            align="left"
+            x="160"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            onclick="switch(fullscreen);" 
+            devices="fullscreensupport" />
+
+    <!-- Sound Button -->
+    <plugin name="enable_sound"
+            url="skin/sound.png"
+            keep="true"
+            align="left"
+            x="200"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            ondown="set(fov_moveforce,+1);"     
+            onup="set(fov_moveforce,0);" />
+
+    <!-- How To Use Tooltip -->
+    <plugin name="how_to_use"
+            url="skin/tooltip.png"
+            keep="true"
+            align="left"
+            x="240"
+            y="0"
+            autosize="true"
+            scale="1.0"
+            handcursor="true"
+            ondown="set(fov_moveforce,+1);"     
+            onup="set(fov_moveforce,0);" />
+
+</plugin>
+</krpano>
